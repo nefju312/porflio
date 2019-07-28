@@ -1,0 +1,28 @@
+--Gearshift Anamation 
+
+local car = script.Parent.Car.Value
+local V= script.Parent.Parent:FindFirstChild("A-Chassis Interface")
+while wait(0.1) do
+	if V.Values.Gear.Value==0 then
+		car.Misc.AW.SS1.W.DesiredAngle = 0
+		car.Misc.AW.SS.W.DesiredAngle = 0
+	elseif V.Values.Gear.Value==-1 then
+		car.Misc.AW.SS1.W.DesiredAngle = -0.3
+		car.Misc.AW.SS.W.DesiredAngle = -0.4
+	elseif V.Values.Gear.Value==1 then
+		car.Misc.AW.SS1.W.DesiredAngle = -0.3
+		car.Misc.AW.SS.W.DesiredAngle = 0.4
+	elseif V.Values.Gear.Value==2 then
+		car.Misc.AW.SS1.W.DesiredAngle = 0
+		car.Misc.AW.SS.W.DesiredAngle = -0.4
+	elseif V.Values.Gear.Value==3 then
+		car.Misc.AW.SS1.W.DesiredAngle = 0
+		car.Misc.AW.SS.W.DesiredAngle = 0.4
+	elseif V.Values.Gear.Value==4 then
+		car.Misc.AW.SS1.W.DesiredAngle = 0.3
+		car.Misc.AW.SS.W.DesiredAngle = 0.4
+	elseif V.Values.Gear.Value==5 then
+		car.Misc.AW.SS1.W.DesiredAngle = 0.3
+		car.Misc.AW.SS.W.DesiredAngle = -0.4
+	end
+end
