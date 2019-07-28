@@ -1,0 +1,70 @@
+-- This Is an ERS Deployment System Used in the ION F1 Racing League
+
+local Fuel = script.Fuel
+local ERS = script.ERS
+local FERS = script.FERS
+local ERSP = script.ERSP
+local FuelM= script.Fuel
+local Frame = script.Parent
+local Values = script.Parent.Parent.Parent:FindFirstChild("A-Chassis Interface")
+local mouse = game.Players.LocalPlayer:GetMouse()
+local EHP=160/100
+local ETQ=120/100
+mouse.KeyDown:connect(function (key)
+    key = string.lower(key)
+
+if key== "k" then
+	if Fuel.Value==2 then
+		Fuel.Value=2
+	else
+		Fuel.Value = Fuel.Value+1
+	end
+elseif key== "l" then
+	if Fuel.Value==0 then
+		Fuel.Value=0
+	else
+		Fuel.Value = Fuel.Value-1
+	end
+elseif key=="h" then
+	if ERS.Value==3 then
+		ERS.Value=3
+	else
+		ERS.Value=ERS.Value+1
+	end
+elseif key=="j" then
+	if ERS.Value==0 then
+		ERS.Value=0
+	else
+		ERS.Value=ERS.Value-1
+	end
+	end
+end)
+
+script.Fuel.Changed:connect(function()
+	if Fuel.Value==0 then
+		script.Parent.ERSLevel.Text= "Lean"
+	elseif Fuel.Value==1 then
+		script.Parent.ERSLevel.Text= "Standard"
+	elseif Fuel.Value==2 then
+		script.Parent.ERSLevel.Text= "Rich"
+	end
+end)
+local e=true
+
+script.ERS.Changed:connect(function()
+	if ERS.Value==0 then
+		script.Parent.FuelMix.Text= "Off"
+		FERS.Value=0
+	elseif ERS.Value==1 and ERSP.Value>0 then
+		script.Parent.FuelMix.Text= "Low"
+		FERS.Value=EHP/3
+		wait(1)
+		ERSP.Value=ERSP.Value-1
+	elseif ERS.Value==2 and ERSP.Value>0 then
+		script.Parent.FuelMix.Text= "Medium"
+		FERS.Value=(EHP*2)/3
+	elseif ERS.Value==3 and ERSP.Value>0 then
+		script.Parent.FuelMix.Text= "High"
+		FERS.Value=EHP
+	end
+end)
